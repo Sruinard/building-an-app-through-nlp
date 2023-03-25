@@ -2,8 +2,8 @@
 # 1. Create a resource group
 # 2. Create an App Service Plan
 # 3. Create an App Service with a python runtime and use github as a deployment source and use the dev branch and build the app
-# 4. Build application during deployment
-# 5. Set the configuration startup file to python app.py
+# 4. Build application during deployment using SCM_DO_BUILD_DURING_DEPLOYMENT=true
+# 5. Set the configuration startup file to use gunicorn
 
 
 # AUTOCOMPLETES FROM HERE (SET VARIABLES BY YOURSELF):
@@ -23,10 +23,11 @@ az appservice plan create --name $appServicePlanName --resource-group $resourceG
 # 3. Create an App Service with a python runtime
 az webapp create --name $webAppName --resource-group $resourceGroupName --plan $appServicePlanName --runtime "PYTHON|3.7" --deployment-source-url $repoUrl --deployment-source-branch $branch
 
-az webapp config set -n $webAppName --startup-file 'python app.py' --resource-group $resourceGroupName
+# 4. Build application during deployment using SCM_DO_BUILD_DURING_DEPLOYMENT=true
+az webapp config appsettings set --name $webAppName --resource-group $resourceGroupName --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
-az webapp config appsettings set -n $webAppName --settings "SCM_DO_BUILD_DURING_DEPLOYMENT=1" --resource-group $resourceGroupName
+# 5. Set the configuration startup file to use gunicorn
+az webapp config set --startup-file "gunicorn --bind='0.0.0.0' --timeout 600 app:app" --name $webAppName --resource-group $resourceGroupName
 
-# 4. Build application during deployment
 
 
