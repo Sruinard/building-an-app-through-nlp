@@ -23,3 +23,10 @@ az appservice plan create --name $appServicePlanName --resource-group $resourceG
 # 3. Create an App Service with a python runtime
 az webapp create --name $webAppName --resource-group $resourceGroupName --plan $appServicePlanName --runtime "PYTHON|3.7" --deployment-source-url $repoUrl --deployment-source-branch $branch
 
+az webapp config set -n $webAppName --startup-file 'python app.py' --resource-group $resourceGroupName
+
+az webapp config appsettings set -n $webAppName --settings "SCM_DO_BUILD_DURING_DEPLOYMENT=1" --resource-group $resourceGroupName
+
+# 4. Build application during deployment
+
+
