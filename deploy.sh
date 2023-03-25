@@ -9,8 +9,8 @@
 # AUTOCOMPLETES FROM HERE (SET VARIABLES BY YOURSELF):
 resourceGroupName="csu-nl-sr-asr-rg"
 location="westeurope"
-appServicePlanName="csu-nl-sr-asr-appserviceplan"
-webAppName="csu-nl-sr-asr-webapp"
+appServicePlanName="csu-nl-sr-asr-appserviceplan1"
+webAppName="csu-nl-sr-asr-webapp1"
 repoUrl="https://github.com/Sruinard/building-an-app-through-nlp"
 branch="dev"
 

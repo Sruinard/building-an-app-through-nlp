@@ -4,6 +4,7 @@
 # create a function which takes in a cuisine and uses azure OPENAI to generate a creative recipe name
 
 # import libraries
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 import os
 import requests
@@ -80,13 +81,26 @@ def structure_recipe(recipe):
     return response.choices[0].text
 
 
-# create a fast api app and add a route to it to create recipes.
+# create a fast api app and add a route to it to create recipes. Enable all CORS using fastapi package.
 # return as a response a JSON object containing the creative recipe name
 # and the structure.
 # use the functions you created above to generate the recipe and creative recipe name.
 # start:
-# create a fast api app
 app = FastAPI()
+
+# enable all CORS using fastapi package
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:8000",
+    "*"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"]
+)
 
 # add a route to it to create recipes from a recipe provided by the user.
 
