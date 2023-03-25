@@ -3,7 +3,8 @@
 # 2. Create an App Service Plan
 # 3. Create an App Service with a python runtime and use github as a deployment source and use the dev branch and build the app
 # 4. Build application during deployment using SCM_DO_BUILD_DURING_DEPLOYMENT=true
-# 5. Set the configuration startup file to use gunicorn
+# 5. enable cors for the app service
+# 6. Set the configuration startup file to use gunicorn
 
 
 # AUTOCOMPLETES FROM HERE (SET VARIABLES BY YOURSELF):
@@ -26,7 +27,10 @@ az webapp create --name $webAppName --resource-group $resourceGroupName --plan $
 # 4. Build application during deployment using SCM_DO_BUILD_DURING_DEPLOYMENT=true
 az webapp config appsettings set --name $webAppName --resource-group $resourceGroupName --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
-# 5. Set the configuration startup file to use gunicorn
+# 5. enable cors for the app service
+az webapp cors add --allowed-origins "*" --name $webAppName --resource-group $resourceGroupName
+
+# 6. Set the configuration startup file to use gunicorn
 az webapp config set --startup-file "gunicorn --bind='0.0.0.0' --timeout 600 app:app" --name $webAppName --resource-group $resourceGroupName
 
 
