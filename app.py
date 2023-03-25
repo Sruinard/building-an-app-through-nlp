@@ -22,7 +22,7 @@ openai.api_base = "https://generative-applications.openai.azure.com/"
 openai.api_version = "2022-12-01"
 
 # set the deployment name to the name you gave to the deployed model. (Note: had to set manually)
-deployment_name = "generative-apps"
+deployment_name = "text-davinci-003"
 
 # create the function to generate a recipe using a cuisine using the openai client. Dont forget to use the deployment name as the engine.
 # use the openai client.
@@ -102,7 +102,7 @@ async def create_recipe(cuisine: str):
     # return the response
     return {"creative_recipe_name": creative_recipe_name, "structured_recipe": structured_recipe}
 
-# run the application on port 8080
+# run the application on port 8000
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
